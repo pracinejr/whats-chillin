@@ -1,20 +1,26 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { HomeContext } from "./home/HomeProvider";
+import { HomeContext } from "../home/HomeProvider";
 
 import "./Login.css";
 
 export const Register = () => {
   const [registerUser, setRegisterUser] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
+    homeId: 0,
     email: "",
-    home: "",
+    photo: "",
   });
   const [conflictDialog, setConflictDialog] = useState(false);
+
   const { homes, getHomes } = useContext(HomeContext);
 
   const history = useHistory();
+
+  useEffect(() => {
+    console.log("useEffect: getHomes");
+    getHomes();
+  }, []);
 
   const handleInputChange = (event) => {
     const newUser = { ...registerUser };
@@ -42,14 +48,15 @@ export const Register = () => {
           },
           body: JSON.stringify({
             email: registerUser.email,
-            name: `${registerUser.firstName} ${registerUser.lastName}`,
+            name: registerUser.name,
+            homeId: registerUser.homeId,
+            photo: registerUser.photo,
           }),
         })
           .then((res) => res.json())
           .then((createdUser) => {
             if (createdUser.hasOwnProperty("id")) {
-              // The user id is saved under the key nutshell_user in session Storage. Change below if needed!
-              sessionStorage.setItem("nutshell_user", createdUser.id);
+              sessionStorage.setItem("whats_chillin_user", createdUser.id);
               history.push("/");
             }
           });
@@ -76,31 +83,37 @@ export const Register = () => {
           Please Register for Application Name
         </h1>
         <fieldset>
-          <label htmlFor="firstName"> First Name </label>
+          <label htmlFor="name"> Name </label>
           <input
             type="text"
-            name="firstName"
-            id="firstName"
+            name="name"
+            id="name"
             className="form-control"
-            placeholder="First name"
+            placeholder="Name"
             required
             autoFocus
-            value={registerUser.firstName}
+            value={registerUser.name}
             onChange={handleInputChange}
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="lastName"> Last Name </label>
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
+          <label htmlFor="user-home-id">Select a Home</label>
+          <select
+            name="userId"
+            id="homeId"
+            value={registerUser.homeId}
             className="form-control"
-            placeholder="Last name"
-            required
-            value={registerUser.lastName}
             onChange={handleInputChange}
-          />
+          >
+            <option value="0">Select a Home</option>
+            {homes.map((home) => {
+              return (
+                <option key={home.id} value={home.id}>
+                  {home.name}
+                </option>
+              );
+            })}
+          </select>
         </fieldset>
         <fieldset>
           <label htmlFor="inputEmail"> Email address </label>
@@ -114,25 +127,6 @@ export const Register = () => {
             value={registerUser.email}
             onChange={handleInputChange}
           />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="home">Select a Recipient</label>
-          <select
-            name="homeId"
-            id="homeId"
-            value={registerUser.homeId}
-            className="form-control"
-            onChange={handleInputChange}
-          >
-            <option value="0">Select a Recipient</option>
-            {homes.map((user) => {
-              return (
-                <option key={user.id} value={user.id}>
-                  {user.name}
-                </option>
-              );
-            })}
-          </select>
         </fieldset>
         <fieldset>
           <button type="submit"> Sign in </button>
