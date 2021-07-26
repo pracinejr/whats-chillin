@@ -1,20 +1,20 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { MessagePostProvider } from "./messagePost/MessagePostProvider";
-// import { MessagePostForm } from "./messagePost/MessagePostForm";
-import { MessagePostList } from "./messagePost/MessagePostList";
+import { PostProvider } from "./post/PostProvider";
+// import { PostForm } from "./post/PostForm";
+import { PostList } from "./post/PostList";
 import { UserProvider } from "./user/UserProvider";
 
 export const ApplicationViews = () => {
   return (
     <>
-      <MessagePostProvider>
+      <PostProvider>
         <UserProvider>
           <Route exact path="/home">
-            <MessagePostList />
+            <PostList />
           </Route>
         </UserProvider>
-      </MessagePostProvider>
+      </PostProvider>
     </>
   );
 };
