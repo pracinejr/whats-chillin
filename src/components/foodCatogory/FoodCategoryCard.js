@@ -7,16 +7,6 @@ export const FoodCategoryCard = ({ foodCategory }) => {
   const { deleteFoodCategory, getFoodCategories } =
     useContext(FoodCategoryContext);
 
-  const handleDelete = () => {
-    deleteFoodCategory(foodCategory.id);
-  };
-
-  const history = useHistory();
-
-  const handleEdit = () => {
-    history.push(`/foodCategories/edit/${foodCategory.id}`);
-  };
-
   return (
     <>
       <section className="card">

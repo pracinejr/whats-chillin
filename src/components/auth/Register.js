@@ -57,7 +57,11 @@ export const Register = () => {
           .then((createdUser) => {
             if (createdUser.hasOwnProperty("id")) {
               sessionStorage.setItem("whats_chillin_user", createdUser.id);
-              history.push("/");
+              sessionStorage.setItem(
+                "whats_chillin_user_homeId",
+                createdUser.homeId
+              );
+              history.push("/posts");
             }
           });
       } else {
