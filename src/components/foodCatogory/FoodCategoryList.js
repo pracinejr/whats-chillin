@@ -13,7 +13,7 @@ export const FoodCategoryList = ({ foodCategory }) => {
 
   return (
     <>
-      <section className="foodCategories">
+      <section className="foodCategories container">
         <h1 className="foodCategory_header">Food Categoreies</h1>
         <div className="foodCategory_list">
           {console.log("FoodCategoryList - Render", foodCategories)}

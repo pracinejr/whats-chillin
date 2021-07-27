@@ -38,25 +38,27 @@ export const FoodItemList = ({ foodItem }) => {
 
   return (
     <>
-      <section className="foodItems">
-        <h1 className="foodItem_header">FoodItems</h1>
+      <div class="container">
+        <section className="foodItems" class="container">
+          <h1 className="foodItem_header">FoodItems</h1>
 
-        <button
-          className="new_foodItem_button"
-          onClick={() => {
-            history.push("/foodItems/create");
-          }}
-        >
-          Add New
-        </button>
+          <button
+            className="new_foodItem_button"
+            onClick={() => {
+              history.push("/foodItems/create");
+            }}
+          >
+            Add New
+          </button>
 
-        <div className="foodItem_list">
-          {console.log("foodItemList - Render", sortedFoodItems)}
-          {sortedFoodItems.map((foodItem) => {
-            return <FoodItemCard key={foodItem.id} foodItem={foodItem} />;
-          })}
-        </div>
-      </section>
+          <div className="foodItem_list">
+            {console.log("foodItemList - Render", sortedFoodItems)}
+            {sortedFoodItems.map((foodItem) => {
+              return <FoodItemCard key={foodItem.id} foodItem={foodItem} />;
+            })}
+          </div>
+        </section>
+      </div>
     </>
   );
 };

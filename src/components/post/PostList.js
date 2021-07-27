@@ -38,25 +38,27 @@ export const PostList = ({ post }) => {
 
   return (
     <>
-      <section className="posts">
-        <h1 className="post_header">Posts</h1>
+      <div class="container">
+        <section className="posts">
+          <h1 className="post_header">Posts</h1>
 
-        <button
-          className="new_post_button"
-          onClick={() => {
-            history.push("/posts/create");
-          }}
-        >
-          Add New
-        </button>
+          <button
+            className="new_post_button"
+            onClick={() => {
+              history.push("/posts/create");
+            }}
+          >
+            Add New
+          </button>
 
-        <div className="post_list">
-          {console.log("postList - Render", sortedPosts)}
-          {sortedPosts.map((post) => {
-            return <PostCard key={post.id} post={post} />;
-          })}
-        </div>
-      </section>
+          <div className="post_list">
+            {console.log("postList - Render", sortedPosts)}
+            {sortedPosts.map((post) => {
+              return <PostCard key={post.id} post={post} />;
+            })}
+          </div>
+        </section>
+      </div>
     </>
   );
 };
