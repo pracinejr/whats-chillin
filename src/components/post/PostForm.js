@@ -4,8 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import "./Post.css";
 
 export const PostForm = () => {
-  const { addPost, getPostById, updatePost } =
-    useContext(PostContext);
+  const { addPost, getPostById, updatePost } = useContext(PostContext);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,11 +13,12 @@ export const PostForm = () => {
   const { postId } = useParams();
 
   const history = useHistory();
-  
+
   const currentUser = parseInt(sessionStorage.getItem("whats_chillin_user"));
 
-  const currentUserHomeId = parseInt(sessionStorage.getItem("whats_chillin_user_homeId")) 
-
+  const currentUserHomeId = parseInt(
+    sessionStorage.getItem("whats_chillin_user_homeId")
+  );
 
   const ts = new Date();
 
@@ -30,12 +30,10 @@ export const PostForm = () => {
 
   const handleClickSavePost = (event) => {
     event.preventDefault();
-    if (
-      post.message === undefined ||
-    ) {
+    if (post.message === "") {
       window.alert("Please complete the form");
-    } else if (PostId) {
-      updatePost(post).then(() => history.push("/home"));
+    } else if (postId) {
+      updatePost(post).then(() => history.push("/posts"));
     } else {
       const newPost = {
         message: post.message,
@@ -43,7 +41,7 @@ export const PostForm = () => {
         sentTime: ts.toLocaleDateString(),
         userId: currentUser,
       };
-      addPost(newPost).then(() => history.push("/home"));
+      addPost(newPost).then(() => history.push("/posts"));
     }
   };
 
@@ -64,15 +62,15 @@ export const PostForm = () => {
       <h2 className="post_form__title">New </h2>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="name"> Message:{post.messgae}</label>
+          <label htmlFor="name"> What would you like to say?</label>
           <input
             type="text"
-            id="title"
+            id="message"
             required
             autoFocus
             className="form-control"
-            placeholder="Enter Your  Here"
-            value={Post.message}
+            placeholder="Enter Your Post Here"
+            value={post.message}
             onChange={handleControlledInputChange}
           />
         </div>
@@ -82,7 +80,7 @@ export const PostForm = () => {
         disabled={isLoading}
         onClick={handleClickSavePost}
       >
-        {PostId ? <>Update Post</> : <>Save Post</>}
+        {postId ? <>Update Post</> : <>Save Post</>}
       </button>
     </form>
   );
