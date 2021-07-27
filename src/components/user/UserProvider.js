@@ -12,7 +12,6 @@ export const UserProvider = (props) => {
       .then((res) => res.json())
       .then(setUsers);
   };
-  console.log(users);
 
   return (
     <UserContext.Provider
