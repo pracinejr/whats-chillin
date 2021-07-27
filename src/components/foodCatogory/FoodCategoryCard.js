@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./FoodCategory.css";
-import { FoodCategoryContext } from "./foodCategory/FoodCategoryProvider";
+import { FoodCategoryContext } from "./FoodCategoryProvider";
+import { useHistory } from "react-router-dom";
 
 export const FoodCategoryCard = ({ foodCategory }) => {
   const { deleteFoodCategory, getFoodCategories } =
@@ -10,13 +11,16 @@ export const FoodCategoryCard = ({ foodCategory }) => {
     deleteFoodCategory(foodCategory.id);
   };
 
+  const history = useHistory();
+
+  const handleEdit = () => {
+    history.push(`/foodCategories/edit/${foodCategory.id}`);
+  };
+
   return (
     <>
       <section className="card">
         <h4 className="card-title">{foodCategory.name}</h4>
-        <button className="btn" onClick={handleDelete}>
-          Delete Category{" "}
-        </button>
       </section>
     </>
   );
