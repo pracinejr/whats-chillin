@@ -1,22 +1,20 @@
 import React, { useContext } from "react";
-import "./Post.css";
-import { PostContext } from "./PostProvider";
+import "./FoodItem.css";
+import { FoodItemContext } from "./FoodItemProvider";
 import { useHistory } from "react-router-dom";
 
-export const PostCard = ({ post }) => {
-  const { deletePost, getPosts } = useContext(PostContext);
-
-  const handleDelete = () => {
-    deletePost(post.id);
-  };
+export const FoodItemCard = ({ foodItem }) => {
+  const { getFoodItems } = useContext(FoodItemContext);
 
   const handleEdit = () => {
-    history.push(`/posts/edit/${post.id}`);
+    history.push(`/foodItems/edit/${foodItem.id}`);
   };
 
-  const currentUser = parseInt(sessionStorage.getItem("whats_chillin_user"));
+  const currentUserHomeId = parseInt(
+    sessionStorage.getItem("whats_chillin_user_homeId")
+  );
   // let foundUser = users.filter(
-  //   (user) => post.user.homeId === currentUser.homeId
+  //   (user) => FoodItem.user.homeId === currentUser.homeId
   // );
   // console.log(foundUser);
 
@@ -24,23 +22,31 @@ export const PostCard = ({ post }) => {
 
   return (
     <>
-      <section className="post">
-        <h3>Posted by: {post.user.name}</h3>
-        <div>{post.message}</div>
-        <div>{post.sentTime}</div>
-        {post.userId === currentUser ? (
-          <>
-            <button className="button" onClick={handleEdit}>
-              Edit
-            </button>
-            <button className="button" onClick={handleDelete}>
-              Delete Post
-            </button>
-          </>
-        ) : (
-          <></>
-        )}
-      </section>
+      {foodItem.homeId === currentUserHomeId ? (
+        <section className="foodItem">
+          <div>
+            <div className="food_item_photo">{foodItem.photo}</div>
+          </div>
+          <div className="food_item_name">{foodItem.name}</div>
+          <div className="food_item_homeId">{foodItem.home?.name}</div>
+          <div className="food_item_homeId">{foodItem.foodCategory?.name}</div>
+          <div className="food_item_storageAreaId">
+            {foodItem.storageArea?.name}
+          </div>
+          <div className="food_item_price">{foodItem.price}</div>
+          <div className="food_item_datePurchased">
+            {foodItem.datePurchased}
+          </div>
+          <div className="food_item_expirationDate">
+            {foodItem.expirationDate}
+          </div>
+          <button className="button" onClick={handleEdit}>
+            Edit
+          </button>
+        </section>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

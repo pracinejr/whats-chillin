@@ -6,7 +6,9 @@ export const FoodItemProvider = (props) => {
   const [foodItems, setFoodItems] = useState([]);
 
   const getFoodItems = () => {
-    return fetch("http://localhost:8088/foodItems?_expand=user")
+    return fetch(
+      "http://localhost:8088/foodItems?_expand=home&_expand=storageArea&_expand=foodCategory"
+    )
       .then((res) => res.json())
       .then(setFoodItems);
   };
@@ -27,11 +29,11 @@ export const FoodItemProvider = (props) => {
     );
   };
 
-  const deleteFoodItem = (foodItemId) => {
-    return fetch(`http://localhost:8088/foodItems/${foodItemId}`, {
-      method: "DELETE",
-    }).then(getFoodItems);
-  };
+  // const deleteFoodItem = (foodItemId) => {
+  //   return fetch(`http://localhost:8088/foodItems/${foodItemId}`, {
+  //     method: "DELETE",
+  //   }).then(getFoodItems);
+  // };
 
   const updateFoodItem = (foodItem) => {
     return fetch(`http://localhost:8088/foodItems/${foodItem.id}?`, {
@@ -49,7 +51,7 @@ export const FoodItemProvider = (props) => {
         value={{
           foodItems,
           getFoodItems,
-          deleteFoodItem,
+          // deleteFoodItem,
           addFoodItem,
           updateFoodItem,
           getFoodItemById,

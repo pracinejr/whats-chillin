@@ -6,6 +6,8 @@ import { PostList } from "./post/PostList";
 import { UserProvider } from "./user/UserProvider";
 import { FoodCategoryProvider } from "./foodCatogory/FoodCategoryProvider";
 import { FoodCategoryList } from "./foodCatogory/FoodCategoryList";
+import { FoodItemProvider } from "./foodItem/FoodItemProvider";
+import { FoodItemList } from "./foodItem/FoodItemList";
 
 export const ApplicationViews = () => {
   return (
@@ -23,6 +25,12 @@ export const ApplicationViews = () => {
           <PostForm />
         </Route>
       </PostProvider>
+
+      <FoodItemProvider>
+        <Route exact path="/foodItems">
+          <FoodItemList />
+        </Route>
+      </FoodItemProvider>
 
       <FoodCategoryProvider>
         <Route exact path="/foodCategories">

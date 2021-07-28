@@ -3,11 +3,9 @@ import { FoodItemCard } from "./FoodItemCard";
 import "./FoodItem.css";
 import { FoodItemContext } from "./FoodItemProvider";
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../user/UserProvider";
 
 export const FoodItemList = ({ foodItem }) => {
   const { foodItems, getFoodItems } = useContext(FoodItemContext);
-  const { users, getUsers } = useContext(UserContext);
 
   const history = useHistory();
 
@@ -18,11 +16,6 @@ export const FoodItemList = ({ foodItem }) => {
   useEffect(() => {
     console.log("useEffect - getFoodItems");
     getFoodItems();
-  }, []);
-
-  useEffect(() => {
-    getUsers();
-    console.log(users);
   }, []);
 
   const FoodItemsFilteredByHome = foodItems.filter(
@@ -39,7 +32,7 @@ export const FoodItemList = ({ foodItem }) => {
   return (
     <>
       <section className="foodItems">
-        <h1 className="foodItem_header">FoodItems</h1>
+        <h1 className="foodItem_header">Food Items</h1>
 
         <button
           className="new_foodItem_button"
