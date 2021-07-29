@@ -59,7 +59,9 @@ export const PostForm = () => {
 
   return (
     <form className="post_form">
-      <h2 className="post_form__title">New </h2>
+      <h2 className="post_form__title">
+        {postId ? <>Update Post</> : <>New Post</>}{" "}
+      </h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name"> What would you like to say?</label>

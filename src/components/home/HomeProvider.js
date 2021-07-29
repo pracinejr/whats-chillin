@@ -28,22 +28,6 @@ export const HomeProvider = (props) => {
     );
   };
 
-  const completeHome = (home) => {
-    return fetch(`http://localhost:8088/Homes/${home.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(home),
-    }).then(getHomes);
-  };
-
-  const deleteHome = (id) => {
-    return fetch(`http://localhost:8088/homes/${id}`, {
-      method: "DELETE",
-    }).then(getHomes);
-  };
-
   const updateHome = (home) => {
     return fetch(`http://localhost:8088/homes/${home.id}`, {
       method: "PUT",
@@ -58,12 +42,10 @@ export const HomeProvider = (props) => {
     <HomeContext.Provider
       value={{
         homes,
-        deleteHome,
         getHomes,
         addHome,
         getHomeById,
         updateHome,
-        completeHome,
       }}
     >
       {props.children}
