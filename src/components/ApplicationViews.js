@@ -12,6 +12,8 @@ import { UserProvider } from "./user/UserProvider";
 import { UserList } from "./user/UserList";
 import { StorageAreaProvider } from "./storageArea/StorageAreaProvider";
 import { StorageAreaList } from "./storageArea/StorageAreaList";
+import { HomeProvider } from "./home/HomeProvider";
+import { HomeList } from "./home/HomeList";
 
 export const ApplicationViews = () => {
   return (
@@ -60,6 +62,14 @@ export const ApplicationViews = () => {
           <StorageAreaList />
         </Route>
       </StorageAreaProvider>
+
+      <HomeProvider>
+        <UserProvider>
+          <Route exact path="/homes">
+            <HomeList />
+          </Route>
+        </UserProvider>
+      </HomeProvider>
     </>
   );
 };
