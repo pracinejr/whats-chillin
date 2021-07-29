@@ -8,9 +8,10 @@ import { FoodCategoryList } from "./foodCatogory/FoodCategoryList";
 import { FoodItemProvider } from "./foodItem/FoodItemProvider";
 import { FoodItemList } from "./foodItem/FoodItemList";
 import { FoodItemForm } from "./foodItem/FoodItemForm";
-import { StorageAreaProvider } from "./storageArea/StorageAreaProvider";
 import { UserProvider } from "./user/UserProvider";
 import { UserList } from "./user/UserList";
+import { StorageAreaProvider } from "./storageArea/StorageAreaProvider";
+import { StorageAreaList } from "./storageArea/StorageAreaList";
 
 export const ApplicationViews = () => {
   return (
@@ -53,6 +54,12 @@ export const ApplicationViews = () => {
           <UserList />
         </Route>
       </UserProvider>
+
+      <StorageAreaProvider>
+        <Route exact path="/storageAreas">
+          <StorageAreaList />
+        </Route>
+      </StorageAreaProvider>
     </>
   );
 };
