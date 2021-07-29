@@ -24,8 +24,8 @@ export const FoodItemList = ({ foodItem }) => {
 
   const sortedFoodItems = FoodItemsFilteredByHome.sort((a, b) => {
     return (
-      parseInt(b.datePurchased.split("/").join("")) -
-      parseInt(a.datePurchased.split("/").join(""))
+      parseInt(b.datePurchased.split("-").join("")) -
+      parseInt(a.datePurchased.split("-").join(""))
     );
   });
 

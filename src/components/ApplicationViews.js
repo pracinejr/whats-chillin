@@ -8,6 +8,8 @@ import { FoodCategoryProvider } from "./foodCatogory/FoodCategoryProvider";
 import { FoodCategoryList } from "./foodCatogory/FoodCategoryList";
 import { FoodItemProvider } from "./foodItem/FoodItemProvider";
 import { FoodItemList } from "./foodItem/FoodItemList";
+import { FoodItemForm } from "./foodItem/FoodItemForm";
+import { StorageAreaProvider } from "./storageArea/StorageAreaProvider";
 
 export const ApplicationViews = () => {
   return (
@@ -30,6 +32,13 @@ export const ApplicationViews = () => {
         <Route exact path="/foodItems">
           <FoodItemList />
         </Route>
+        <FoodCategoryProvider>
+          <StorageAreaProvider>
+            <Route exact path="/foodItems/create">
+              <FoodItemForm />
+            </Route>
+          </StorageAreaProvider>
+        </FoodCategoryProvider>
       </FoodItemProvider>
 
       <FoodCategoryProvider>

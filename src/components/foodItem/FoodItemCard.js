@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
 import "./FoodItem.css";
-import { FoodItemContext } from "./FoodItemProvider";
 import { useHistory } from "react-router-dom";
 
 export const FoodItemCard = ({ foodItem }) => {
-  const { getFoodItems } = useContext(FoodItemContext);
-
   const handleEdit = () => {
     history.push(`/foodItems/edit/${foodItem.id}`);
   };
