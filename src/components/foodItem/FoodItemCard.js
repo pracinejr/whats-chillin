@@ -26,7 +26,7 @@ export const FoodItemCard = ({ foodItem }) => {
           </div>
           <div className="food_item_name">{foodItem.name}</div>
           <div className="food_item_homeId">{foodItem.home?.name}</div>
-          <div className="food_item_homeId">{foodItem.foodCategory?.name}</div>
+          <div className="food_item_homeId">{foodItem.category?.name}</div>
           <div className="food_item_storageAreaId">
             {foodItem.storageArea?.name}
           </div>

@@ -45,7 +45,7 @@ export const FoodItemForm = () => {
     if (
       foodItem.name === "" ||
       foodItem.storageAreaId === 0 ||
-      foodItem.foodCategoryId === 0 ||
+      foodItem.categoryId === 0 ||
       foodItem.datePurchased === "" ||
       foodItem.expirationDate === ""
       // foodItem.price === ""
@@ -58,7 +58,7 @@ export const FoodItemForm = () => {
         name: foodItem.name,
         datePurchased: foodItem.datePurchased,
         expirationDate: foodItem.expirationDate,
-        foodCategoryId: parseInt(foodItem.foodCategoryId),
+        foodCategoryId: parseInt(foodItem.categoryId),
         storageAreaId: parseInt(foodItem.storageAreaId),
         homeId: currentUserHomeId,
         price: foodItem.price,
@@ -137,7 +137,7 @@ export const FoodItemForm = () => {
         <select
           name="foodCategoryId"
           id="foodCategoryId"
-          value={foodItem.foodCategoryId}
+          value={foodItem.categoryId}
           className="form-control"
           onChange={handleControlledInputChange}
         >

@@ -3,13 +3,14 @@ import { Route } from "react-router-dom";
 import { PostProvider } from "./post/PostProvider";
 import { PostForm } from "./post/PostForm";
 import { PostList } from "./post/PostList";
-import { UserProvider } from "./user/UserProvider";
 import { FoodCategoryProvider } from "./foodCatogory/FoodCategoryProvider";
 import { FoodCategoryList } from "./foodCatogory/FoodCategoryList";
 import { FoodItemProvider } from "./foodItem/FoodItemProvider";
 import { FoodItemList } from "./foodItem/FoodItemList";
 import { FoodItemForm } from "./foodItem/FoodItemForm";
 import { StorageAreaProvider } from "./storageArea/StorageAreaProvider";
+import { UserProvider } from "./user/UserProvider";
+import { UserList } from "./user/UserList";
 
 export const ApplicationViews = () => {
   return (
@@ -46,6 +47,12 @@ export const ApplicationViews = () => {
           <FoodCategoryList />
         </Route>
       </FoodCategoryProvider>
+
+      <UserProvider>
+        <Route exact path="/users">
+          <UserList />
+        </Route>
+      </UserProvider>
     </>
   );
 };

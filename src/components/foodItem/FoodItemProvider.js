@@ -7,7 +7,7 @@ export const FoodItemProvider = (props) => {
 
   const getFoodItems = () => {
     return fetch(
-      "http://localhost:8088/foodItems?_expand=home&_expand=storageArea&_expand=foodCategory"
+      "http://localhost:8088/foodItems?_expand=home&_expand=storageArea&_expand=category"
     )
       .then((res) => res.json())
       .then(setFoodItems);
