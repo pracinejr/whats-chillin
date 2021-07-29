@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
 import "./FoodItem.css";
-import { FoodItemContext } from "./FoodItemProvider";
 import { useHistory } from "react-router-dom";
 
 export const FoodItemCard = ({ foodItem }) => {
-  const { getFoodItems } = useContext(FoodItemContext);
-
   const handleEdit = () => {
     history.push(`/foodItems/edit/${foodItem.id}`);
   };
@@ -29,7 +26,7 @@ export const FoodItemCard = ({ foodItem }) => {
           </div>
           <div className="food_item_name">{foodItem.name}</div>
           <div className="food_item_homeId">{foodItem.home?.name}</div>
-          <div className="food_item_homeId">{foodItem.foodCategory?.name}</div>
+          <div className="food_item_homeId">{foodItem.category?.name}</div>
           <div className="food_item_storageAreaId">
             {foodItem.storageArea?.name}
           </div>

@@ -7,7 +7,7 @@ export const FoodItemProvider = (props) => {
 
   const getFoodItems = () => {
     return fetch(
-      "http://localhost:8088/foodItems?_expand=home&_expand=storageArea&_expand=foodCategory"
+      "http://localhost:8088/foodItems?_expand=home&_expand=storageArea&_expand=category"
     )
       .then((res) => res.json())
       .then(setFoodItems);
@@ -15,7 +15,7 @@ export const FoodItemProvider = (props) => {
 
   const addFoodItem = (foodItemObj) => {
     return fetch("http://localhost:8088/foodItems", {
-      method: "FoodItem",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -28,12 +28,6 @@ export const FoodItemProvider = (props) => {
       res.json()
     );
   };
-
-  // const deleteFoodItem = (foodItemId) => {
-  //   return fetch(`http://localhost:8088/foodItems/${foodItemId}`, {
-  //     method: "DELETE",
-  //   }).then(getFoodItems);
-  // };
 
   const updateFoodItem = (foodItem) => {
     return fetch(`http://localhost:8088/foodItems/${foodItem.id}?`, {
@@ -51,7 +45,6 @@ export const FoodItemProvider = (props) => {
         value={{
           foodItems,
           getFoodItems,
-          // deleteFoodItem,
           addFoodItem,
           updateFoodItem,
           getFoodItemById,

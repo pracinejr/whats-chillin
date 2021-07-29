@@ -1,12 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./FoodCategory.css";
-import { FoodCategoryContext } from "./FoodCategoryProvider";
-import { useHistory } from "react-router-dom";
 
 export const FoodCategoryCard = ({ foodCategory }) => {
-  const { deleteFoodCategory, getFoodCategories } =
-    useContext(FoodCategoryContext);
-
   return (
     <>
       <section className="card">
