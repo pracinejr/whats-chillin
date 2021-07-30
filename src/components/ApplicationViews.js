@@ -14,6 +14,7 @@ import { StorageAreaProvider } from "./storageArea/StorageAreaProvider";
 import { StorageAreaList } from "./storageArea/StorageAreaList";
 import { HomeProvider } from "./home/HomeProvider";
 import { HomeList } from "./home/HomeList";
+import { HomeForm } from "./home/HomeForm";
 
 export const ApplicationViews = () => {
   return (
@@ -67,6 +68,12 @@ export const ApplicationViews = () => {
         <UserProvider>
           <Route exact path="/homes">
             <HomeList />
+          </Route>
+          <Route exact path="/homes/create">
+            <HomeForm />
+          </Route>
+          <Route exact path="/homes/edit/:homeId(\d+)">
+            <HomeForm />
           </Route>
         </UserProvider>
       </HomeProvider>

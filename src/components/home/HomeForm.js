@@ -27,7 +27,10 @@ export const HomeForm = () => {
     if (home.name === "") {
       window.alert("Please complete the form");
     } else if (homeId) {
-      updateHome(home).then(() => history.push("/homes"));
+      updateHome({
+        id: home.id,
+        name: home.name,
+      }).then(() => history.push("/homes"));
     } else {
       const newHome = {
         name: home.name,
@@ -55,7 +58,7 @@ export const HomeForm = () => {
       </h2>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="name"> Food Item Name</label>
+          <label htmlFor="name">New Home Name</label>
           <input
             type="text"
             id="name"
@@ -73,7 +76,7 @@ export const HomeForm = () => {
         disabled={isLoading}
         onClick={handleClickSaveHome}
       >
-        {homeId ? <>Update Food Item</> : <>Save Food Item</>}
+        {homeId ? <>Save Updated Home</> : <>Save Home</>}
       </button>
     </form>
   );
