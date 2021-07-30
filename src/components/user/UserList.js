@@ -2,12 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { UserCard } from "./UserCard";
 import "./User.css";
 import { UserContext } from "./UserProvider";
+import { useHistory } from "react-router-dom";
 
 export const UserList = ({ user }) => {
   const { users, getUsers } = useContext(UserContext);
 
   useEffect(() => {
-    console.log("useEffect - getusers");
     getUsers();
   }, []);
 
