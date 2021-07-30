@@ -10,6 +10,7 @@ import { FoodItemList } from "./foodItem/FoodItemList";
 import { FoodItemForm } from "./foodItem/FoodItemForm";
 import { UserProvider } from "./user/UserProvider";
 import { UserList } from "./user/UserList";
+import { UserForm } from "./user/UserForm";
 import { StorageAreaProvider } from "./storageArea/StorageAreaProvider";
 import { StorageAreaList } from "./storageArea/StorageAreaList";
 import { HomeProvider } from "./home/HomeProvider";
@@ -56,6 +57,11 @@ export const ApplicationViews = () => {
         <Route exact path="/users">
           <UserList />
         </Route>
+        <HomeProvider>
+          <Route exact path="/users/edit/:userId(\d+)">
+            <UserForm />
+          </Route>
+        </HomeProvider>
       </UserProvider>
 
       <StorageAreaProvider>

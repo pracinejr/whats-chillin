@@ -29,7 +29,7 @@ export const HomeProvider = (props) => {
   };
 
   const updateHome = (home) => {
-    return fetch(`http://localhost:8088/homes/${home.id}`, {
+    return fetch(`http://localhost:8088/homes/${home.id}?`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

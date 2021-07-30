@@ -13,20 +13,32 @@ export const UserProvider = (props) => {
       .then(setUsers);
   };
 
-  const editUsers = (userObj) => {
+  const getUserById = (id) => {
+    return fetch(`http://localhost:8088/users/${id}?_embed=users`).then((res) =>
+      res.json()
+    );
+  };
+
+  const updateUser = (userObj) => {
     return fetch(`http://localhost:8088/users/${userObj.id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
-      }
-      body: JSON.stringify(userObj)
-    })
-    .then(getUsers)
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userObj),
+    }).then(getUsers);
   };
 
   return (
     <UserContext.Provider
-      value={{ users, getUsers, searchTerms, setSearchTerms }}
+      value={{
+        users,
+        getUsers,
+        searchTerms,
+        setSearchTerms,
+        updateUser,
+        getUserById,
+      }}
     >
       {props.children}
     </UserContext.Provider>
