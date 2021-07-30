@@ -11,7 +11,7 @@ export const HomeList = ({ home }) => {
 
   const history = useHistory();
 
-  const currentUser = parseInt(sessionStorage.getItem("whats_chillin_user"));
+  // const currentUser = parseInt(sessionStorage.getItem("whats_chillin_user"));
 
   const currentUserHomeId = parseInt(
     sessionStorage.getItem("whats_chillin_user_homeId")
@@ -34,7 +34,7 @@ export const HomeList = ({ home }) => {
   const yourHome = homes.find((home) => home.id === currentUserHomeId);
 
   const handleEdit = () => {
-    history.push(`/homes/edit/${home.id}`);
+    history.push(`/homes/edit/${yourHome.id}`);
   };
 
   return (
