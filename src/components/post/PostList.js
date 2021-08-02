@@ -30,10 +30,7 @@ export const PostList = ({ post }) => {
   );
 
   const sortedPosts = postsFilteredByHome.sort((a, b) => {
-    return (
-      parseInt(b.sentTime.split("/").join("")) -
-      parseInt(a.sentTime.split("/").join(""))
-    );
+    return b.timeStamp - a.timeStamp;
   });
 
   return (

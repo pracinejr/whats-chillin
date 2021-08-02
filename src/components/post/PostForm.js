@@ -21,6 +21,7 @@ export const PostForm = () => {
   );
 
   const ts = new Date();
+  const timeStamp = new Date();
 
   const handleControlledInputChange = (event) => {
     const newPost = { ...post };
@@ -40,6 +41,7 @@ export const PostForm = () => {
         homeId: currentUserHomeId,
         sentTime: ts.toLocaleDateString(),
         userId: currentUser,
+        timeStamp: timeStamp.getTime() / 1000,
       };
       addPost(newPost).then(() => history.push("/posts"));
     }
