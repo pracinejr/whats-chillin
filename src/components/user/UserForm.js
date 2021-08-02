@@ -9,28 +9,36 @@ export const UserForm = () => {
   const { homes, getHomes } = useContext(HomeContext);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [user, setUser] = useState({
-    name: "",
-    userPhoto: "",
-    homeId: 0,
-  });
+  const [user, setUser] = useState({});
 
   const { userId } = useParams();
 
   const history = useHistory();
 
+  const currentUser = parseInt(sessionStorage.getItem("whats_chillin_user"));
+
   const handleControlledInputChange = (event) => {
-    const newUser = { ...user };
-    newUser[event.target.id] = event.target.value;
-    setUser(newUser);
+    const updatedUser = { ...user };
+    updatedUser[event.target.id] = event.target.value;
+    setUser(updatedUser);
   };
 
   const handleClickSaveUser = (event) => {
     event.preventDefault();
     if (user.name === "" || user.userPhoto === "" || user.homeId === "") {
       window.alert("Please complete the form");
-    } else if (userId) {
-      updateUser(user).then(() => history.push("/users"));
+    } else {
+      if (currentUser === user.id) {
+        sessionStorage.removeItem("whats_chillin_user_homeId");
+        sessionStorage.setItem("whats_chillin_user_homeId", user.homeId);
+      }
+      updateUser({
+        name: user.name,
+        homeId: parseInt(user.homeId),
+        userPhoto: user.userPhoto,
+        email: user.email,
+        id: user.id,
+      }).then(() => history.push("/users"));
     }
   };
 

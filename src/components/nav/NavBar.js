@@ -1,8 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
+import { useHistory } from "react-router-dom";
 
 export const NavBar = (props) => {
+  const history = useHistory();
+
+  const logoutButton = () => {
+    sessionStorage.clear();
+    history.push("/login");
+  };
+
   return (
     <ul className="navbar">
       <li className="navbar__item active">
@@ -34,6 +42,11 @@ export const NavBar = (props) => {
         <Link className="navbar__link" to="/homes">
           Your Home
         </Link>
+      </li>
+      <li className="navbar__item">
+        <button type="submit" onClick={logoutButton}>
+          Logout
+        </button>
       </li>
     </ul>
   );
