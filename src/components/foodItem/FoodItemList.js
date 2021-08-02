@@ -18,11 +18,11 @@ export const FoodItemList = ({ foodItem }) => {
     getFoodItems();
   }, []);
 
-  const FoodItemsFilteredByHome = foodItems.filter(
+  const foodItemsFilteredByHome = foodItems.filter(
     (foodItem) => foodItem.homeId === currentUserHomeId
   );
 
-  const sortedFoodItems = FoodItemsFilteredByHome.sort((a, b) => {
+  const sortedFoodItems = foodItemsFilteredByHome.sort((a, b) => {
     return (
       parseInt(b.datePurchased.split("-").join("")) -
       parseInt(a.datePurchased.split("-").join(""))

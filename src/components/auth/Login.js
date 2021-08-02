@@ -27,8 +27,11 @@ export const Login = () => {
     existingUserCheck().then((exists) => {
       if (exists) {
         // The user id is saved under the key whats_chillin_user in session Storage. Change below if needed!
-        sessionStorage.setItem("whats_chillin_user", exists.id);
-        sessionStorage.setItem("whats_chillin_user_homeId", exists.homeId);
+        sessionStorage.setItem("whats_chillin_user", parseInt(exists.id));
+        sessionStorage.setItem(
+          "whats_chillin_user_homeId",
+          parseInt(exists.homeId)
+        );
         history.push("/posts");
       } else {
         setExistDialog(true);
