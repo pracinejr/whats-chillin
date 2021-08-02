@@ -4,6 +4,7 @@ export const FoodItemContext = createContext();
 
 export const FoodItemProvider = (props) => {
   const [foodItems, setFoodItems] = useState([]);
+  const [searchTerms, setSearchTerms] = useState("");
 
   const getFoodItems = () => {
     return fetch(
@@ -48,6 +49,8 @@ export const FoodItemProvider = (props) => {
           addFoodItem,
           updateFoodItem,
           getFoodItemById,
+          searchTerms,
+          setSearchTerms,
         }}
       >
         {props.children}
