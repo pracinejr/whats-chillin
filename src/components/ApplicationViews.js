@@ -3,11 +3,12 @@ import { Route } from "react-router-dom";
 import { PostProvider } from "./post/PostProvider";
 import { PostForm } from "./post/PostForm";
 import { PostList } from "./post/PostList";
-import { FoodCategoryProvider } from "./foodCatogory/FoodCategoryProvider";
-import { FoodCategoryList } from "./foodCatogory/FoodCategoryList";
+import { CategoryProvider } from "./foodCatogory/FoodCategoryProvider";
+import { CategoryList } from "./foodCatogory/FoodCategoryList";
 import { FoodItemProvider } from "./foodItem/FoodItemProvider";
 import { FoodItemList } from "./foodItem/FoodItemList";
 import { FoodItemForm } from "./foodItem/FoodItemForm";
+import { FoodItemSearch } from "./foodItem/FoodItemSearch";
 import { UserProvider } from "./user/UserProvider";
 import { UserList } from "./user/UserList";
 import { UserForm } from "./user/UserForm";
@@ -36,22 +37,23 @@ export const ApplicationViews = () => {
 
       <FoodItemProvider>
         <Route exact path="/foodItems">
+          <FoodItemSearch />
           <FoodItemList />
         </Route>
-        <FoodCategoryProvider>
+        <CategoryProvider>
           <StorageAreaProvider>
             <Route exact path="/foodItems/create">
               <FoodItemForm />
             </Route>
           </StorageAreaProvider>
-        </FoodCategoryProvider>
+        </CategoryProvider>
       </FoodItemProvider>
 
-      <FoodCategoryProvider>
-        <Route exact path="/foodCategories">
-          <FoodCategoryList />
+      <CategoryProvider>
+        <Route exact path="/categories">
+          <CategoryList />
         </Route>
-      </FoodCategoryProvider>
+      </CategoryProvider>
 
       <UserProvider>
         <Route exact path="/users">

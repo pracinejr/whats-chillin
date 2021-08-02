@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FoodItemCard } from "./FoodItemCard";
 import "./FoodItem.css";
 import { FoodItemContext } from "./FoodItemProvider";
 import { useHistory } from "react-router-dom";
 
 export const FoodItemList = ({ foodItem }) => {
-  const { foodItems, getFoodItems } = useContext(FoodItemContext);
+  const { foodItems, getFoodItems, searchTerms } = useContext(FoodItemContext);
+  const [filteredFoodItems, setFiltered] = useState([]);
 
   const history = useHistory();
 
@@ -14,7 +15,6 @@ export const FoodItemList = ({ foodItem }) => {
   );
 
   useEffect(() => {
-    console.log("useEffect - getFoodItems");
     getFoodItems();
   }, []);
 
@@ -28,6 +28,18 @@ export const FoodItemList = ({ foodItem }) => {
       parseInt(a.datePurchased.split("-").join(""))
     );
   });
+
+  useEffect(() => {
+    if (searchTerms !== "") {
+      const subset = sortedFoodItems.filter((foodItem) =>
+        foodItem.name.toLowerCase().includes(searchTerms)
+      );
+
+      setFiltered(subset);
+    } else {
+      setFiltered(foodItems);
+    }
+  }, [searchTerms, sortedFoodItems]);
 
   return (
     <>
@@ -44,8 +56,8 @@ export const FoodItemList = ({ foodItem }) => {
         </button>
 
         <div className="foodItem_list">
-          {console.log("foodItemList - Render", sortedFoodItems)}
-          {sortedFoodItems.map((foodItem) => {
+          {console.log("foodItemList - Render", filteredFoodItems)}
+          {filteredFoodItems.map((foodItem) => {
             return <FoodItemCard key={foodItem.id} foodItem={foodItem} />;
           })}
         </div>

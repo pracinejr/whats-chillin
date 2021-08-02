@@ -82,7 +82,7 @@ export const PostForm = () => {
         disabled={isLoading}
         onClick={handleClickSavePost}
       >
-        {postId ? <>Update Post</> : <>Save Post</>}
+        {postId ? <>Update Post</> : <>Save New Post</>}
       </button>
     </form>
   );

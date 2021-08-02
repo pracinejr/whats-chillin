@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { FoodItemContext } from "./FoodItemProvider";
 import { useHistory, useParams } from "react-router-dom";
 import "./FoodItem.css";
-import { FoodCategoryContext } from "../foodCatogory/FoodCategoryProvider";
+import { CategoryContext } from "../foodCatogory/FoodCategoryProvider";
 import { StorageAreaContext } from "../storageArea/StorageAreaProvider";
 
 export const FoodItemForm = () => {
   const { addFoodItem, getFoodItemById, updateFoodItem } =
     useContext(FoodItemContext);
 
-  const { foodCategories, getFoodCategories } = useContext(FoodCategoryContext);
+  const { categories, getCategories } = useContext(CategoryContext);
 
   const { storageAreas, getStorageAreas } = useContext(StorageAreaContext);
 
@@ -18,10 +18,11 @@ export const FoodItemForm = () => {
   const [foodItem, setFoodItem] = useState({
     name: "",
     storageAreaId: 0,
-    foodCategoryId: 0,
+    categoryId: 0,
     datePurchased: "",
     expirationDate: "",
-    // price: "",
+    price: "",
+    photo: "",
   });
 
   const { foodItemId } = useParams();
@@ -47,8 +48,9 @@ export const FoodItemForm = () => {
       foodItem.storageAreaId === 0 ||
       foodItem.categoryId === 0 ||
       foodItem.datePurchased === "" ||
-      foodItem.expirationDate === ""
-      // foodItem.price === ""
+      foodItem.expirationDate === "" ||
+      foodItem.price === 0 ||
+      foodItem.photo === ""
     ) {
       window.alert("Please complete the form");
     } else if (foodItemId) {
@@ -58,7 +60,7 @@ export const FoodItemForm = () => {
         name: foodItem.name,
         datePurchased: foodItem.datePurchased,
         expirationDate: foodItem.expirationDate,
-        foodCategoryId: parseInt(foodItem.categoryId),
+        categoryId: parseInt(foodItem.categoryId),
         storageAreaId: parseInt(foodItem.storageAreaId),
         homeId: currentUserHomeId,
         price: foodItem.price,
@@ -70,12 +72,11 @@ export const FoodItemForm = () => {
 
   useEffect(() => {
     getStorageAreas()
-      .then(getFoodCategories())
+      .then(getCategories())
       .then(() => {
         if (foodItemId) {
           getFoodItemById(foodItemId).then((foodItem) => {
             setFoodItem(foodItem);
-            console.log(foodItem);
             setIsLoading(false);
           });
         } else {
@@ -135,17 +136,17 @@ export const FoodItemForm = () => {
       </fieldset>
       <fieldset>
         <select
-          name="foodCategoryId"
-          id="foodCategoryId"
+          name="categoryId"
+          id="categoryId"
           value={foodItem.categoryId}
           className="form-control"
           onChange={handleControlledInputChange}
         >
           <option>Select a Food Category</option>
-          {foodCategories.map((foodCategory) => {
+          {categories.map((category) => {
             return (
-              <option key={foodCategory.id} value={foodCategory.id}>
-                {foodCategory.name}
+              <option key={category.id} value={category.id}>
+                {category.name}
               </option>
             );
           })}
@@ -168,6 +169,36 @@ export const FoodItemForm = () => {
             );
           })}
         </select>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <label htmlFor="date">Price: </label>
+          <input
+            type="number"
+            id="price"
+            required
+            autoFocus
+            className="form-control"
+            placeholder="$$$"
+            value={foodItem.price}
+            onChange={handleControlledInputChange}
+          />
+        </div>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <label htmlFor="photo">Photo link: </label>
+          <input
+            type="text"
+            id="photo"
+            required
+            autoFocus
+            className="form-control"
+            placeholder="Enter Photo Link Here"
+            value={foodItem.photo}
+            onChange={handleControlledInputChange}
+          />
+        </div>
       </fieldset>
       <button
         className="btn btn-primary"

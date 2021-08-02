@@ -30,12 +30,12 @@ export const FoodItemCard = ({ foodItem }) => {
           <div className="food_item_storageAreaId">
             {foodItem.storageArea?.name}
           </div>
-          <div className="food_item_price">{foodItem.price}</div>
+          <div className="food_item_price">${foodItem.price}</div>
           <div className="food_item_datePurchased">
-            {foodItem.datePurchased}
+            Date Purchased: {foodItem.datePurchased}
           </div>
           <div className="food_item_expirationDate">
-            {foodItem.expirationDate}
+            Expiration Date: {foodItem.expirationDate}
           </div>
           <button className="button" onClick={handleEdit}>
             Edit
