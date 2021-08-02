@@ -21,6 +21,7 @@ export const FoodItemList = ({ foodItem }) => {
   const foodItemsFilteredByHome = foodItems.filter(
     (foodItem) => foodItem.homeId === currentUserHomeId
   );
+  const todaysDate = new Date();
 
   const sortedFoodItems = foodItemsFilteredByHome.sort((a, b) => {
     return (
@@ -28,6 +29,10 @@ export const FoodItemList = ({ foodItem }) => {
       parseInt(a.datePurchased.split("-").join(""))
     );
   });
+
+  const expiredFood = foodItemsFilteredByHome.filter(
+    (foodItem) => foodItem.expirationDate >= todaysDate
+  );
 
   useEffect(() => {
     if (searchTerms !== "") {
@@ -58,7 +63,13 @@ export const FoodItemList = ({ foodItem }) => {
         <div className="foodItem_list">
           {console.log("foodItemList - Render", filteredFoodItems)}
           {filteredFoodItems.map((foodItem) => {
-            return <FoodItemCard key={foodItem.id} foodItem={foodItem} />;
+            return (
+              <FoodItemCard
+                key={foodItem.id}
+                foodItem={foodItem}
+                // value={expiredFood ? <> This Item Is Expired</> : <></>} Not sure how to make this work
+              />
+            );
           })}
         </div>
       </section>
