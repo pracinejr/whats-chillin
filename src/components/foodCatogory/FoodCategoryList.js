@@ -18,7 +18,7 @@ export const CategoryList = ({ category }) => {
         <div className="category_list">
           {console.log("categoryList - Render", categories)}
           {categories.map((category) => {
-            return <CategoryCard key={category.id} Category={category} />;
+            return <CategoryCard key={category.id} category={category} />;
           })}
         </div>
       </section>
