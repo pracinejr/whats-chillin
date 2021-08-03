@@ -31,13 +31,16 @@ export const FoodItemProvider = (props) => {
   };
 
   const updateFoodItem = (foodItem) => {
-    return fetch(`http://localhost:8088/foodItems/${foodItem.id}?`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(foodItem),
-    }).then(getFoodItems);
+    return fetch(
+      `http://localhost:8088/foodItems/${foodItem.id}?_expand=home&_expand=storageArea&_expand=category`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(foodItem),
+      }
+    ).then(getFoodItems);
   };
 
   return (
