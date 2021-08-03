@@ -1,19 +1,24 @@
 import React, { useContext } from "react";
 import "./FoodItem.css";
 import { useHistory } from "react-router-dom";
+import { FoodItemContext } from "./FoodItemProvider";
 
 export const FoodItemCard = ({ foodItem }) => {
+  const { foodItems, getFoodItems } = useContext(FoodItemContext);
+
   const handleEdit = () => {
     history.push(`/foodItems/edit/${foodItem.id}`);
   };
 
+  const todaysDate = new Date();
+
+  const expirationDate = new Date(foodItem.expirationDate);
+
   const currentUserHomeId = parseInt(
     sessionStorage.getItem("whats_chillin_user_homeId")
   );
-  // let foundUser = users.filter(
-  //   (user) => FoodItem.user.homeId === currentUser.homeId
-  // );
-  // console.log(foundUser);
+
+  const expiredFood = todaysDate > expirationDate;
 
   const history = useHistory();
 
@@ -37,6 +42,11 @@ export const FoodItemCard = ({ foodItem }) => {
           <div className="food_item_expirationDate">
             Expiration Date: {foodItem.expirationDate}
           </div>
+          {expiredFood ? (
+            <div className="expiration_alert">THIS ITEM IS EXPIRED</div>
+          ) : (
+            <></>
+          )}
           <button className="button" onClick={handleEdit}>
             Edit
           </button>

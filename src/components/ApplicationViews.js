@@ -45,6 +45,9 @@ export const ApplicationViews = () => {
             <Route exact path="/foodItems/create">
               <FoodItemForm />
             </Route>
+            <Route exact path="/foodItems/edit/:foodItemId(\d+)">
+              <FoodItemForm />
+            </Route>
           </StorageAreaProvider>
         </CategoryProvider>
       </FoodItemProvider>

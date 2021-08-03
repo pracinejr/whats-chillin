@@ -29,6 +29,20 @@ export const FoodItemForm = () => {
 
   const history = useHistory();
 
+  useEffect(() => {
+    getStorageAreas()
+      .then(getCategories)
+      .then(() => {
+        if (foodItemId) {
+          getFoodItemById(foodItemId).then((foodItem) => {
+            setFoodItem(foodItem);
+            setIsLoading(false);
+          });
+        } else {
+          setIsLoading(false);
+        }
+      });
+  }, []);
   // const currentUser = parseInt(sessionStorage.getItem("whats_chillin_user"));
 
   const currentUserHomeId = parseInt(
@@ -69,22 +83,6 @@ export const FoodItemForm = () => {
       addFoodItem(newFoodItem).then(() => history.push("/foodItems"));
     }
   };
-
-  useEffect(() => {
-    getStorageAreas()
-      .then(getCategories())
-      .then(() => {
-        if (foodItemId) {
-          getFoodItemById(foodItemId).then((foodItem) => {
-            setFoodItem(foodItem);
-            setIsLoading(false);
-          });
-        } else {
-          setIsLoading(false);
-        }
-      });
-  }, []);
-  console.log(foodItem);
 
   return (
     <form className="foodItem_form">
