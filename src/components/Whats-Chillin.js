@@ -5,6 +5,7 @@ import { NavBar } from "./nav/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import { HomeProvider } from "./home/HomeProvider";
+import { Copyright } from "./copyright/CopyrightProvider";
 import "./Whats-Chillin.css";
 
 export const WhatsChillin = () => (
@@ -16,6 +17,7 @@ export const WhatsChillin = () => (
             <>
               <NavBar />
               <ApplicationViews />
+              <Copyright />
             </>
           );
         } else {
