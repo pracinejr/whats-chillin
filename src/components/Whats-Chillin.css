@@ -8,7 +8,6 @@
 .nav {
   justify-content: left;
   flex-grow: 1;
-  flex-shrink: inherit;
 }
 
 .app_view {
