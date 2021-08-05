@@ -5,6 +5,7 @@ import { NavBar } from "./nav/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import { HomeProvider } from "./home/HomeProvider";
+import { Copyright } from "./copyright/CopyrightProvider";
 import "./Whats-Chillin.css";
 
 export const WhatsChillin = () => (
@@ -14,8 +15,15 @@ export const WhatsChillin = () => (
         if (sessionStorage.getItem("whats_chillin_user")) {
           return (
             <>
-              <NavBar />
-              <ApplicationViews />
+              <div class="main_container">
+                <div class="nav">
+                  <NavBar />
+                </div>
+                <ApplicationViews />
+              </div>
+              <div class="copyright">
+                <Copyright />
+              </div>
             </>
           );
         } else {
