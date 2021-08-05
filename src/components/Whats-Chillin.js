@@ -15,9 +15,15 @@ export const WhatsChillin = () => (
         if (sessionStorage.getItem("whats_chillin_user")) {
           return (
             <>
-              <NavBar />
-              <ApplicationViews />
-              <Copyright />
+              <div class="main_container">
+                <div class="nav">
+                  <NavBar />
+                </div>
+                <ApplicationViews />
+              </div>
+              <div class="copyright">
+                <Copyright />
+              </div>
             </>
           );
         } else {

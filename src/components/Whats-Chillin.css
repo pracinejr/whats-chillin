@@ -1,0 +1,12 @@
+.main_container {
+  display: flex;
+}
+
+.nav {
+  justify-content: left;
+}
+
+.copyright {
+  justify-content: bottom;
+  margin-bottom: auto;
+}
