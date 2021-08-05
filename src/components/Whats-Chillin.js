@@ -19,7 +19,9 @@ export const WhatsChillin = () => (
                 <div class="nav">
                   <NavBar />
                 </div>
-                <ApplicationViews />
+                <div class="app_view">
+                  <ApplicationViews />
+                </div>
               </div>
               <div class="copyright">
                 <Copyright />

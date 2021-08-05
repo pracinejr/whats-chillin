@@ -56,13 +56,11 @@ export const FoodItemList = ({ foodItem }) => {
         </button>
 
         <div className="foodItem_list">
-          {/* {console.log("foodItemList - Render", filteredFoodItems)} */}
           {filteredFoodItems.map((foodItem) => {
             return (
               <FoodItemCard
                 key={foodItem.id}
                 foodItem={foodItem}
-                // value={expiredFood ? <> This Item Is Expired</> : <></>} Not sure how to make this work
               />
             );
           })}

@@ -37,8 +37,10 @@ export const ApplicationViews = () => {
 
       <FoodItemProvider>
         <Route exact path="/foodItems">
-          <FoodItemSearch />
-          <FoodItemList />
+          <div>
+            <FoodItemSearch />
+            <FoodItemList />
+          </div>
         </Route>
         <CategoryProvider>
           <StorageAreaProvider>
