@@ -1,9 +1,20 @@
 .main_container {
   display: flex;
+  justify-content: stretch;
+  justify-content: left;
+  /* justify-content: space-around; */
 }
 
 .nav {
   justify-content: left;
+  flex-grow: 1;
+  flex-shrink: inherit;
+}
+
+.app_view {
+  justify-content: start;
+  flex-grow: 5;
+  flex-basis: content;
 }
 
 .copyright {
