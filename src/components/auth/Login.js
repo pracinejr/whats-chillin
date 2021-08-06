@@ -123,7 +123,7 @@ export const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign in to What's Chillin'
           </Typography>
           <form className={classes.form} noValidate>
             <TextField

@@ -172,7 +172,7 @@ export const Register = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            REGISTER
+            Register to What's Chillin'
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
