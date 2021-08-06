@@ -1,6 +1,7 @@
 import React from "react";
 import "./User.css";
 import { useHistory } from "react-router-dom";
+import { Image } from "cloudinary-react";
 
 export const UserCard = ({ user }) => {
   const history = useHistory();
@@ -14,7 +15,11 @@ export const UserCard = ({ user }) => {
   return (
     <>
       <section className="card">
-        <div className="card-photo"> {user.userPhoto}</div>
+        <Image
+          cloudName="pracinejr"
+          style={{ width: 200, height: 200 }}
+          publicId={user.userPhoto}
+        />
         <h4 className="card-title">{user.name}</h4>
         <h4 className="card-body">{user.email}</h4>
         {user.id === currentUser ? (
