@@ -4,13 +4,12 @@ import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
-// import CardMedia from "@material-ui/core/CardMedia";
 import { Image } from "cloudinary-react";
-import { CardMedia } from "@material-ui/core";
+import { CardMedia, Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
@@ -19,17 +18,11 @@ const useStyles = makeStyles((theme) => ({
   heroButtons: {
     marginTop: theme.spacing(4),
   },
-  cardGrid: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
   card: {
-    height: "100%",
+    height: "250px",
+    width: "200px",
     display: "flex",
     flexDirection: "column",
-  },
-  cardMedia: {
-    paddingTop: "56.25%", // 16:9
   },
   cardContent: {
     flexGrow: 1,
@@ -46,24 +39,40 @@ export const CategoryCard = ({ category }) => {
   const classes = useStyles();
 
   return (
-    <Grid className={classes.cardGrid} container spacing={4}>
-      {cards.map((card) => (
-        <Grid item key={card} xs={12} sm={6} md={4}>
-          <Card className={classes.card}>
-            <CardMedia className={classes.cardMedia}>
-              <Image
-                cloudName="pracinejr"
-                // style={{ width: 200, height: 200 }}
-                publicId={category.image}
-              />
-            </CardMedia>
-            <CardContent className={classes.cardContent}>
-              {category.name}
-            </CardContent>
-          </Card>
+    <React.Fragment>
+      <Container maxWidth="sm">
+        <Grid
+          // className={classes.cardGrid}
+          container
+          spacing={4}
+          justifyContent="left"
+        >
+          {cards.map((card) => (
+            <Grid
+              className={classes.cardGrid}
+              item
+              key={card}
+              xs={4}
+              sm={2}
+              md={4}
+            >
+              <Card className={classes.card}>
+                <CardMedia>
+                  <Image
+                    cloudName="pracinejr"
+                    style={{ width: 200, height: 200 }}
+                    publicId={category.image}
+                  />
+                </CardMedia>
+                <CardContent className={classes.cardContent}>
+                  {category.name}
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
-      ))}
-    </Grid>
+      </Container>
+    </React.Fragment>
   );
 };
 /* <section className="card">

@@ -108,7 +108,7 @@ export const Register = () => {
         registerUser.email === "" ||
         registerUser.name === "" ||
         registerUser.homeId === "" ||
-        registerUser.photo === ""
+        registerUser.userPhoto === ""
       ) {
         window.alert("Please complete the form");
       } else if (!userExists) {
@@ -121,8 +121,8 @@ export const Register = () => {
           body: JSON.stringify({
             email: registerUser.email,
             name: registerUser.name,
-            homeId: registerUser.homeId,
-            photo: registerUser.photo,
+            homeId: parseInt(registerUser.homeId),
+            userPhoto: registerUser.userPhoto,
           }),
         })
           .then((res) => res.json())
@@ -142,16 +142,16 @@ export const Register = () => {
     });
   };
 
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      },
-    },
-  };
+  // const ITEM_HEIGHT = 48;
+  // const ITEM_PADDING_TOP = 8;
+  // const MenuProps = {
+  //   PaperProps: {
+  //     style: {
+  //       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+  //       width: 250,
+  //     },
+  //   },
+  // };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -185,6 +185,8 @@ export const Register = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              value={registerUser.email}
+              onChange={handleInputChange}
             />
             <TextField
               variant="outlined"

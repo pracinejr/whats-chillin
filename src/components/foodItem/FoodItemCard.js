@@ -2,9 +2,49 @@ import React, { useContext } from "react";
 import "./FoodItem.css";
 import { useHistory } from "react-router-dom";
 import { FoodItemContext } from "./FoodItemProvider";
+import Card from "@material-ui/core/Card";
+import Grid from "@material-ui/core/Grid";
+import CardContent from "@material-ui/core/CardContent";
+import { makeStyles } from "@material-ui/core/styles";
+import { CardMedia, Container } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import CardActions from "@material-ui/core/CardActions";
+import { Image } from "cloudinary-react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    marginRight: theme.spacing(1),
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
+  },
+  heroButtons: {
+    marginTop: theme.spacing(4),
+  },
+  card: {
+    height: "100%",
+    width: "400px",
+    display: "flex",
+    flexDirection: "column",
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
+  },
+}));
+
+const cards = [1];
 
 export const FoodItemCard = ({ foodItem }) => {
-  const { foodItems, getFoodItems } = useContext(FoodItemContext);
+  // const { foodItems, getFoodItems } = useContext(FoodItemContext);
+
+  const classes = useStyles();
 
   const handleEdit = () => {
     history.push(`/foodItems/edit/${foodItem.id}`);
@@ -25,35 +65,93 @@ export const FoodItemCard = ({ foodItem }) => {
   return (
     <>
       {foodItem.homeId === currentUserHomeId ? (
-        <section className="foodItem">
-          <div>
-            <div className="food_item_photo">{foodItem.photo}</div>
-          </div>
-          <div className="food_item_name">{foodItem.name}</div>
-          <div className="food_item_homeId">{foodItem.home?.name}</div>
-          <div className="food_item_homeId">{foodItem.category?.name}</div>
-          <div className="food_item_storageAreaId">
-            {foodItem.storageArea?.name}
-          </div>
-          <div className="food_item_price">${foodItem.price}</div>
-          <div className="food_item_datePurchased">
-            Date Purchased: {foodItem.datePurchased}
-          </div>
-          <div className="food_item_expirationDate">
-            Expiration Date: {foodItem.expirationDate}
-          </div>
-          {expiredFood ? (
-            <div className="expiration_alert">THIS ITEM IS EXPIRED</div>
-          ) : (
-            <></>
-          )}
-          <button className="button" onClick={handleEdit}>
-            Edit
-          </button>
-        </section>
+        <React.Fragment>
+          <CssBaseline />
+          <Container className={classes.cardGrid} maxWidth="md">
+            {/* End hero unit */}
+            <Grid container spacing={4}>
+              {cards.map((card) => (
+                <Grid item key={card} xs={12} sm={6} md={4}>
+                  <Card className={classes.card}>
+                    <CardMedia>
+                      <Image
+                        cloudName="pracinejr"
+                        style={{ width: 200, height: 200 }}
+                        publicId={foodItem.photo}
+                      />
+                    </CardMedia>
+                    <CardContent className={classes.cardContent}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {foodItem.name}
+                      </Typography>
+                      <Typography>{foodItem.home?.name}</Typography>
+                      <Typography>{foodItem.category?.name}</Typography>
+                      <Typography>{foodItem.storageArea?.name}</Typography>
+                      <Typography>${foodItem.price}</Typography>
+                      <Typography>
+                        Date Purchased: {foodItem.datePurchased}
+                      </Typography>
+                      <Typography>
+                        Expiration Date: {foodItem.expirationDate}
+                      </Typography>
+                      {expiredFood ? (
+                        <Typography className="expiration_alert">
+                          THIS ITEM IS EXPIRED
+                        </Typography>
+                      ) : (
+                        <></>
+                      )}
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        type="submit"
+                        size="small"
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={handleEdit}
+                      >
+                        Edit
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </React.Fragment>
       ) : (
         <></>
       )}
     </>
   );
 };
+
+// {
+//   /* <section className="foodItem">
+// <div>
+//   <div className="food_item_photo">{foodItem.photo}</div>
+// </div>
+// <div className="food_item_name">{foodItem.name}</div>
+// <div className="food_item_homeId">{foodItem.home?.name}</div>
+// <div className="food_item_homeId">{foodItem.category?.name}</div>
+// <div className="food_item_storageAreaId">
+//   {foodItem.storageArea?.name}
+// </div>
+// <div className="food_item_price">${foodItem.price}</div>
+// <div className="food_item_datePurchased">
+//   Date Purchased: {foodItem.datePurchased}
+// </div>
+// <div className="food_item_expirationDate">
+//   Expiration Date: {foodItem.expirationDate}
+// </div>
+// {expiredFood ? (
+//   <div className="expiration_alert">THIS ITEM IS EXPIRED</div>
+// ) : (
+//   <></>
+// )}
+// <button className="button" onClick={handleEdit}>
+//   Edit
+// </button>
+// </section> */
+// }
