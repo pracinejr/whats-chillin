@@ -3,6 +3,7 @@ import { FoodItemCard } from "./FoodItemCard";
 import "./FoodItem.css";
 import { FoodItemContext } from "./FoodItemProvider";
 import { useHistory } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 export const FoodItemList = ({ foodItem }) => {
   const { foodItems, getFoodItems, searchTerms } = useContext(FoodItemContext);
@@ -46,23 +47,22 @@ export const FoodItemList = ({ foodItem }) => {
       <section className="foodItems">
         <h1 className="foodItem_header">Food Items</h1>
 
-        <button
-          className="new_foodItem_button"
+        <Button
+          type="submit"
+          size="small"
+          variant="contained"
+          color="primary"
+          className="foodItem_add_button"
           onClick={() => {
             history.push("/foodItems/create");
           }}
         >
           Add New
-        </button>
+        </Button>
 
         <div className="foodItem_list">
           {filteredFoodItems.map((foodItem) => {
-            return (
-              <FoodItemCard
-                key={foodItem.id}
-                foodItem={foodItem}
-              />
-            );
+            return <FoodItemCard key={foodItem.id} foodItem={foodItem} />;
           })}
         </div>
       </section>
