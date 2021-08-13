@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import "./FoodItem.css";
 import { CategoryContext } from "../foodCatogory/FoodCategoryProvider";
 import { StorageAreaContext } from "../storageArea/StorageAreaProvider";
+import Axios from "axios";
 
 export const FoodItemForm = () => {
   const { addFoodItem, getFoodItemById, updateFoodItem } =
@@ -64,7 +65,7 @@ export const FoodItemForm = () => {
       foodItem.datePurchased === "" ||
       foodItem.expirationDate === "" ||
       foodItem.price === 0 ||
-      foodItem.photo === ""
+      foodItem.photo === 0
     ) {
       window.alert("Please complete the form");
     } else if (foodItemId) {
@@ -82,6 +83,21 @@ export const FoodItemForm = () => {
       };
       addFoodItem(newFoodItem).then(() => history.push("/foodItems"));
     }
+  };
+
+  const [imageSelected, setImageSelected] = useState("");
+
+  const uploadImage = (files) => {
+    const formData = new FormData();
+    formData.append("file", imageSelected);
+    formData.append("upload_preset", "n8iub9db");
+
+    Axios.post(
+      "https://cloudinary.com/v1_1/pracinejr/image/upload",
+      formData
+    ).then((response) => {
+      console.log(response);
+    });
   };
 
   return (
@@ -187,21 +203,25 @@ export const FoodItemForm = () => {
         <div className="form-group">
           <label htmlFor="photo">Photo link: </label>
           <input
-            type="text"
-            id="photo"
-            required
-            autoFocus
-            className="form-control"
-            placeholder="Enter Photo Link Here"
-            value={foodItem.photo}
-            onChange={handleControlledInputChange}
+            type="file"
+            // id="photo"
+            // required
+            // autoFocus
+            // className="form-control"
+            // placeholder="Enter Photo Link Here"
+            // value={foodItem.photo}
+            onChange={(event) => {
+              setImageSelected(event.target.files[0]);
+            }}
           />
+          {/* <button onClick={uploadImage}> Upload Image</button> */}
         </div>
       </fieldset>
       <button
         className="btn btn-primary"
         disabled={isLoading}
         onClick={handleClickSaveFoodItem}
+        onClick={uploadImage}
       >
         {foodItemId ? <>Update Food Item</> : <>Save Food Item</>}
       </button>
