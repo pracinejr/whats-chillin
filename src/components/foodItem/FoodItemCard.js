@@ -24,11 +24,17 @@ const useStyles = makeStyles((theme) => ({
   heroButtons: {
     marginTop: theme.spacing(4),
   },
+  // cardGrid: {
+  //   display: "flex",
+  //   flexWrap: "wrap",
+  // },
   card: {
     height: "100%",
     width: "400px",
     display: "flex",
     flexDirection: "column",
+    // backgroundColor: "#18286B",
+    // color: "#fb53a0"
   },
   cardContent: {
     flexGrow: 1,

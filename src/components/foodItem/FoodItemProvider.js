@@ -43,6 +43,16 @@ export const FoodItemProvider = (props) => {
     ).then(getFoodItems);
   };
 
+  const addFoodItemPhoto = (foodItemImgObj, foodId) => {
+    return fetch(`http://localhost:8088/foodItems/${foodId}?`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(foodItemImgObj),
+    }).then(getFoodItems);
+  };
+
   return (
     <>
       <FoodItemContext.Provider
@@ -54,6 +64,8 @@ export const FoodItemProvider = (props) => {
           getFoodItemById,
           searchTerms,
           setSearchTerms,
+          addFoodItemPhoto,
+          // getFoodItemPhoto,
         }}
       >
         {props.children}

@@ -4,9 +4,11 @@ import { useHistory, useParams } from "react-router-dom";
 import "./FoodItem.css";
 import { CategoryContext } from "../foodCatogory/FoodCategoryProvider";
 import { StorageAreaContext } from "../storageArea/StorageAreaProvider";
+import Axios from "axios";
+import Button from "@material-ui/core/Button";
 
 export const FoodItemForm = () => {
-  const { addFoodItem, getFoodItemById, updateFoodItem } =
+  const { addFoodItem, getFoodItemById, updateFoodItem, addFoodItemPhoto } =
     useContext(FoodItemContext);
 
   const { categories, getCategories } = useContext(CategoryContext);
@@ -64,7 +66,7 @@ export const FoodItemForm = () => {
       foodItem.datePurchased === "" ||
       foodItem.expirationDate === "" ||
       foodItem.price === 0 ||
-      foodItem.photo === ""
+      foodItem.photo === 0
     ) {
       window.alert("Please complete the form");
     } else if (foodItemId) {
@@ -81,6 +83,55 @@ export const FoodItemForm = () => {
         photo: foodItem.photo,
       };
       addFoodItem(newFoodItem).then(() => history.push("/foodItems"));
+    }
+  };
+
+  const [imageSelected, setImageSelected] = useState("");
+
+  const uploadImage = () => {
+    if (imageSelected) {
+      const formData = new FormData();
+      formData.append("file", imageSelected);
+      formData.append("upload_preset", "n8iub9db");
+
+      Axios.post(
+        "https://api.cloudinary.com/v1_1/pracinejr/image/upload",
+        formData
+      ).then((response) => {
+        if (foodItemId) {
+          const foodItemImgObj = {
+            name: foodItem.name,
+            datePurchased: foodItem.datePurchased,
+            expirationDate: foodItem.expirationDate,
+            categoryId: parseInt(foodItem.categoryId),
+            storageAreaId: parseInt(foodItem.storageAreaId),
+            homeId: currentUserHomeId,
+            price: foodItem.price,
+            photo: response.data.secure_url,
+            // foodItemId: parseInt(foodItemId),
+          };
+          const foodId = parseInt(foodItemId);
+
+          addFoodItemPhoto(foodItemImgObj, foodId).then(() =>
+            history.push("/foodItems")
+          );
+          console.log(foodItemImgObj);
+        } else {
+          const foodItemObj = {
+            name: foodItem.name,
+            datePurchased: foodItem.datePurchased,
+            expirationDate: foodItem.expirationDate,
+            categoryId: parseInt(foodItem.categoryId),
+            storageAreaId: parseInt(foodItem.storageAreaId),
+            homeId: currentUserHomeId,
+            price: foodItem.price,
+            photo: response.data.secure_url,
+          };
+          addFoodItem(foodItemObj).then(() => history.push("/foodItems"));
+        }
+      });
+    } else {
+      window.alert("plese select and upload an image");
     }
   };
 
@@ -187,24 +238,29 @@ export const FoodItemForm = () => {
         <div className="form-group">
           <label htmlFor="photo">Photo link: </label>
           <input
-            type="text"
-            id="photo"
-            required
-            autoFocus
-            className="form-control"
-            placeholder="Enter Photo Link Here"
-            value={foodItem.photo}
-            onChange={handleControlledInputChange}
+            type="file"
+            // id="photo"
+            // required
+            // autoFocus
+            // className="form-input"
+            // placeholder="Enter Photo Link Here"
+            // value={setImageSelected}
+            onChange={(event) => {
+              setImageSelected(event.target.files[0]);
+            }}
           />
+          <Button className="btn" onClick={uploadImage}>
+            {foodItemId ? <>Update Food Item</> : <>Save Food Item</>}
+          </Button>
         </div>
       </fieldset>
-      <button
+      {/* <button
         className="btn btn-primary"
-        disabled={isLoading}
+        type="submit"
+        // disabled={isLoading}
         onClick={handleClickSaveFoodItem}
       >
-        {foodItemId ? <>Update Food Item</> : <>Save Food Item</>}
-      </button>
+      </button> */}
     </form>
   );
 };
