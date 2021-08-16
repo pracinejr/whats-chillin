@@ -25,7 +25,7 @@ export const UserForm = () => {
 
   const handleClickSaveUser = (event) => {
     event.preventDefault();
-    if (user.name === "" || user.userPhoto === "" || user.homeId === "") {
+    if (user.name === "" || user.userPhoto === 0 || user.homeId === "") {
       window.alert("Please complete the form");
     } else {
       if (currentUser === user.id) {
