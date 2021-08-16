@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   // },
   card: {
     height: "100%",
-    width: "max-content",
+    width: "400px",
     display: "flex",
     flexDirection: "column",
     // backgroundColor: "#18286B",
