@@ -5,9 +5,10 @@ import "./FoodItem.css";
 import { CategoryContext } from "../foodCatogory/FoodCategoryProvider";
 import { StorageAreaContext } from "../storageArea/StorageAreaProvider";
 import Axios from "axios";
+import Button from "@material-ui/core/Button";
 
 export const FoodItemForm = () => {
-  const { addFoodItem, getFoodItemById, updateFoodItem } =
+  const { addFoodItem, getFoodItemById, updateFoodItem, addFoodItemPhoto } =
     useContext(FoodItemContext);
 
   const { categories, getCategories } = useContext(CategoryContext);
@@ -87,17 +88,51 @@ export const FoodItemForm = () => {
 
   const [imageSelected, setImageSelected] = useState("");
 
-  const uploadImage = (files) => {
-    const formData = new FormData();
-    formData.append("file", imageSelected);
-    formData.append("upload_preset", "n8iub9db");
+  const uploadImage = () => {
+    if (imageSelected) {
+      const formData = new FormData();
+      formData.append("file", imageSelected);
+      formData.append("upload_preset", "n8iub9db");
 
-    Axios.post(
-      "https://cloudinary.com/v1_1/pracinejr/image/upload",
-      formData
-    ).then((response) => {
-      console.log(response);
-    });
+      Axios.post(
+        "https://api.cloudinary.com/v1_1/pracinejr/image/upload",
+        formData
+      ).then((response) => {
+        if (foodItemId) {
+          const foodItemImgObj = {
+            name: foodItem.name,
+            datePurchased: foodItem.datePurchased,
+            expirationDate: foodItem.expirationDate,
+            categoryId: parseInt(foodItem.categoryId),
+            storageAreaId: parseInt(foodItem.storageAreaId),
+            homeId: currentUserHomeId,
+            price: foodItem.price,
+            photo: response.data.secure_url,
+            // foodItemId: parseInt(foodItemId),
+          };
+          const foodId = parseInt(foodItemId);
+
+          addFoodItemPhoto(foodItemImgObj, foodId).then(() =>
+            history.push("/foodItems")
+          );
+          console.log(foodItemImgObj);
+        } else {
+          const foodItemObj = {
+            name: foodItem.name,
+            datePurchased: foodItem.datePurchased,
+            expirationDate: foodItem.expirationDate,
+            categoryId: parseInt(foodItem.categoryId),
+            storageAreaId: parseInt(foodItem.storageAreaId),
+            homeId: currentUserHomeId,
+            price: foodItem.price,
+            photo: response.data.secure_url,
+          };
+          addFoodItem(foodItemObj).then(() => history.push("/foodItems"));
+        }
+      });
+    } else {
+      window.alert("plese select and upload an image");
+    }
   };
 
   return (
@@ -207,24 +242,25 @@ export const FoodItemForm = () => {
             // id="photo"
             // required
             // autoFocus
-            // className="form-control"
+            // className="form-input"
             // placeholder="Enter Photo Link Here"
-            // value={foodItem.photo}
+            // value={setImageSelected}
             onChange={(event) => {
               setImageSelected(event.target.files[0]);
             }}
           />
-          {/* <button onClick={uploadImage}> Upload Image</button> */}
+          <Button className="btn" onClick={uploadImage}>
+            {foodItemId ? <>Update Food Item</> : <>Save Food Item</>}
+          </Button>
         </div>
       </fieldset>
-      <button
+      {/* <button
         className="btn btn-primary"
-        disabled={isLoading}
+        type="submit"
+        // disabled={isLoading}
         onClick={handleClickSaveFoodItem}
-        onClick={uploadImage}
       >
-        {foodItemId ? <>Update Food Item</> : <>Save Food Item</>}
-      </button>
+      </button> */}
     </form>
   );
 };
