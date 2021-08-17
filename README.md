@@ -1,71 +1,34 @@
-# Getting Started with Create React App
+<p align="center"><img alt="What's Chillin'?" src="/assets/Logo.png" width=300px height="180px" /></p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# About The Project
 
-## Available Scripts
+What's Chillin'? is an app developed for anyone age 4+ that has any part of the grocery consuming or list making process in any home. Users are able to create an account, join other familiy members in a "Home" and share messages as well as update which food items are in which storage location as well as help build the next grocery list for that home. Members will also be prompted when any food item they have in their homes is expired, allowing them to either discard that item or add it to the next grocery list.
 
-In the project directory, you can run:
+### Built With
 
-### `npm start`
+- React
+- Javascript
+- Material UI
+- HTML
+- CSS
+- Cloudinary
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Instructions to run What's Chillin'? locally.
 
-### `npm test`
+1. Clone What's Chillin'? by running the following command in your terminal: git clone git@github.com:pracinejr/whats-chillin.git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Once cloned, you'll need to install the libraries and dependencies needed including Cloudinary and Material UI. Run the following commands in your terminal:
+   "npm install"
+   "npm install cloudinary"
+   "npm install @material-ui/core"
+   "npm install @material-ui/icons"
 
-### `npm run build`
+1. In the root of the project, run npm start to run What's Chillin'? in your browser. This will open What's Chillin'? in your browser in the following url: http://localhost:3000/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. In the terminal, in another tab, What's Chillin'? does require running a JSON server to have access to all the data. In your API directory run the following command: json-server -p 8088 -w database.json
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Special Thanks
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# whats-chillin
+- All members and instructors in C-49 for making this one of the best experiances I've ever had.
