@@ -57,34 +57,34 @@ export const FoodItemForm = () => {
     setFoodItem(newFoodItem);
   };
 
-  const handleClickSaveFoodItem = (event) => {
-    event.preventDefault();
-    if (
-      foodItem.name === "" ||
-      foodItem.storageAreaId === 0 ||
-      foodItem.categoryId === 0 ||
-      foodItem.datePurchased === "" ||
-      foodItem.expirationDate === "" ||
-      foodItem.price === 0 ||
-      foodItem.photo === 0
-    ) {
-      window.alert("Please complete the form");
-    } else if (foodItemId) {
-      updateFoodItem(foodItem).then(() => history.push("/foodItems"));
-    } else {
-      const newFoodItem = {
-        name: foodItem.name,
-        datePurchased: foodItem.datePurchased,
-        expirationDate: foodItem.expirationDate,
-        categoryId: parseInt(foodItem.categoryId),
-        storageAreaId: parseInt(foodItem.storageAreaId),
-        homeId: currentUserHomeId,
-        price: foodItem.price,
-        photo: foodItem.photo,
-      };
-      addFoodItem(newFoodItem).then(() => history.push("/foodItems"));
-    }
-  };
+  // const handleClickSaveFoodItem = (event) => {
+  //   event.preventDefault();
+  //   if (
+  //     foodItem.name === "" ||
+  //     foodItem.storageAreaId === 0 ||
+  //     foodItem.categoryId === 0 ||
+  //     foodItem.datePurchased === "" ||
+  //     foodItem.expirationDate === "" ||
+  //     foodItem.price === 0 ||
+  //     foodItem.photo === 0
+  //   ) {
+  //     window.alert("Please complete the form");
+  //   } else if (foodItemId) {
+  //     updateFoodItem(foodItem).then(() => history.push("/foodItems"));
+  //   } else {
+  //     const newFoodItem = {
+  //       name: foodItem.name,
+  //       datePurchased: foodItem.datePurchased,
+  //       expirationDate: foodItem.expirationDate,
+  //       categoryId: parseInt(foodItem.categoryId),
+  //       storageAreaId: parseInt(foodItem.storageAreaId),
+  //       homeId: currentUserHomeId,
+  //       price: foodItem.price,
+  //       photo: foodItem.photo,
+  //     };
+  //     addFoodItem(newFoodItem).then(() => history.push("/foodItems"));
+  //   }
+  // };
 
   const [imageSelected, setImageSelected] = useState("");
 
@@ -249,7 +249,14 @@ export const FoodItemForm = () => {
               setImageSelected(event.target.files[0]);
             }}
           />
-          <Button className="btn" onClick={uploadImage}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            size="medium"
+            className="btn"
+            onClick={uploadImage}
+          >
             {foodItemId ? <>Update Food Item</> : <>Save Food Item</>}
           </Button>
         </div>

@@ -14,6 +14,7 @@ import AllInboxOutlinedIcon from "@material-ui/icons/AllInboxOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import clsx from "clsx";
+import Logo from "../../assets/Logo.png";
 
 const drawerWidth = 240;
 
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
+    paddingRight: 24,
   },
   toolbarIcon: {
     display: "flex",
@@ -38,14 +39,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  // appBarShift: {
-  //   marginLeft: drawerWidth,
-  //   width: `calc(100% - ${drawerWidth}px)`,
-  //   transition: theme.transitions.create(["width", "margin"], {
-  //     easing: theme.transitions.easing.sharp,
-  //     duration: theme.transitions.duration.enteringScreen,
-  //   }),
-  // },
+
   menuButton: {
     marginRight: 36,
   },
@@ -96,13 +90,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// const logo = require('....src/assets/Logo.png')
+
 export const NavBar = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const [open, setOpen] = React.useState(true);
-  // const handleDrawerOpen = () => {
-  //   setOpen(true);
-  // };
 
   const logoutButton = () => {
     sessionStorage.clear();
@@ -143,6 +136,7 @@ export const NavBar = (props) => {
   return (
     <div className={classes.root}>
       <div className={classes.paper}>
+        <img className="logo_img" src={Logo} alt="logo"></img>
         <Drawer
           variant="permanent"
           classes={{
