@@ -1,4 +1,4 @@
-<p align="center"><img alt="What's Chillin'?" src="/assets/Logo.png" width=300px height="180px" /></p>
+<p align="center"><img alt="What's Chillin'?" src="/src/assets/Logo.png" width=300px height="180px" /></p>
 
 # About The Project
 
